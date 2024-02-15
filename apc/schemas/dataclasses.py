@@ -1,10 +1,9 @@
-from enum import Enum
-from datetime import time
-from typing import List, Dict, Optional
 from dataclasses import dataclass, asdict, field
-from marshmallow import ValidationError
+from datetime import time
+from enum import Enum
+from typing import Optional
 
-from schemas.validation import validate_country_code
+from apc.schemas.validation import validate_country_code
 
 
 class ItemType(Enum):
@@ -79,6 +78,7 @@ class Address:
     country_code: Optional[str] = field(default="GB")
     person_name: Optional[str] = field(default=None)
     phone_number: Optional[str] = field(default=None)
+    mobile_number: Optional[str] = field(default=None)
     email: Optional[str] = field(default=None)
 
     def __post_init__(self):
@@ -103,4 +103,11 @@ class Address:
         Returns:
             dict: A dictionary representation of the Company object.
         """
-        return asdict(self)
+        data = asdict(self)
+        data["contact"] = {
+            "person_name": data.pop("person_name"),
+            "phone_number": data.pop("phone_number"),
+            "mobile_number": data.pop("mobile_number"),
+            "email": data.pop("email")
+        }
+        return data
