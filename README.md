@@ -10,8 +10,6 @@ Suitable for:
 
 Todo: 
 
-[ ] create a method for generating the raw ZPL code / download the PDF to file
-
-[ ] track orders
-
-[ ] improve error handling
+- [ ] create a method for generating the raw ZPL code / download the PDF to file
+- [ ] track orders
+- [ ] improve error handling
