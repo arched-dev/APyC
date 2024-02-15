@@ -1,5 +1,6 @@
 import base64
 import datetime
+import os
 from datetime import time
 from typing import List, Dict, Optional, Any, Union
 
@@ -478,8 +479,15 @@ class APC:
     order: _Order
 
     def __init__(
-        self, company: Address, username: str, password: str, is_sandbox: bool = False
+        self, company: Address, username:Optional[str] = None, password: Optional[str] = None, is_sandbox: bool = False
     ):
+
+        if not username:
+            username = os.environ.get("APC_USERNAME")
+
+        if not password:
+            password = os.environ.get("APC_PASSWORD")
+
         self.company = company
         self._api = _BaseApi(
             username, password, is_sandbox

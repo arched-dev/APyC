@@ -1,1 +1,3 @@
 /tests/.pytest_cache/
+/.env
+/my_demo.py
